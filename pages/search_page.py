@@ -1,19 +1,22 @@
 import time
-
 from selenium.webdriver.common.by import By
+from base.base_driver import BaseDriver
 
 
-class SearchPage:
-    def __init__(self, driver):
+class SearchPage(BaseDriver):
+    def __init__(self, driver, wait):
+        super().__init__(driver, wait)
         self.driver = driver
+        self.driver = wait
 
     def trip_type(self, trip_type):
-        if trip_type == "one_way":
-            one = self.driver.find_element(By.XPATH, "(//span[@class='control'])[3]")  # found myself
-            one.click()
-        if trip_type == "round_trip":
-            one = self.driver.find_element(By.XPATH, "(//span[@class='control'])[2]")  # found myself
-            one.click()
+        match trip_type:
+            case "one_way":
+                self.driver.find_element(By.XPATH, "(//span[@class='control'])[3]").click()
+            case "round_trip":
+                self.driver.find_element(By.XPATH, "(//span[@class='control'])[2]").click()
+            case _:
+                return "Please enter 'one_way' or 'round_trip'"
 
     def search_flight(self, depart_airport, destination_airport, departure_date):
         depart_from = self.driver.find_element(By.ID, "reservationFlightSearchForm.originAirport")
