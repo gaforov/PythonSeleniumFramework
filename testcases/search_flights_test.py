@@ -19,3 +19,4 @@ class TestSearchAndVerifyFilter:
         result_page = ResultPage(self.driver, self.wait)
         result_page.filter_nonstop_flights()
 
+
