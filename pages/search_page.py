@@ -1,10 +1,13 @@
+import logging
 import time
 from selenium.webdriver.common.by import By
 from base.base_driver import BaseDriver
 from pages.flights_result_page import ResultPage
+from utilities.utils import Utils
 
 
 class SearchPage(BaseDriver):
+    log = Utils.test_logger()
     # def __init__(self, driver, wait):
     #     super().__init__(driver, wait)
     #     self.driver = driver
@@ -14,6 +17,7 @@ class SearchPage(BaseDriver):
     DEPART_FROM_FIELD = "reservationFlightSearchForm.originAirport"
     DESTINATION = "reservationFlightSearchForm.destinationAirport"
     DEPART_DATE = "aa-leavingOn"
+    RETURN_DATE = "aa-returningOn"
     SEARCH_BUTTON = "flightSearchForm.button.reSubmit"
     ONE_WAY_FLIGHT = "(//span[@class='control'])[3]"
     ROUND_TRIP_FLIGHT = "(//span[@class='control'])[2]"
@@ -69,6 +73,13 @@ class SearchPage(BaseDriver):
         self.get_departure_date().clear()
         self.get_departure_date().send_keys(departure_date)
         # self.get_departure_date().send_keys(Keys.RETURN) # sometimes needed depending on the field implementation
+
+    def get_return_date(self):
+        return self.driver.find_element(By.ID, self.RETURN_DATE)
+
+    def enter_return_date(self, return_date):
+        self.get_return_date().clear()
+        self.get_return_date().send_keys(return_date)
 
     def get_search_button(self):
         return self.driver.find_element(By.ID, self.SEARCH_BUTTON)

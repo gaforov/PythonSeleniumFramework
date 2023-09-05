@@ -1,3 +1,4 @@
+import logging
 import time
 
 from selenium.webdriver.common.by import By
@@ -7,6 +8,7 @@ from utilities.utils import Utils
 
 
 class ResultPage(BaseDriver):
+    log = Utils.test_logger()
     # def __init__(self, driver, wait):
     #     super().__init__(driver, wait)
     #     self.driver = driver
@@ -25,7 +27,7 @@ class ResultPage(BaseDriver):
         self.driver.find_element(By.XPATH, self.NONSTOP_OPTION).click()  # Nonstop option radio btn
         self.driver.find_element(By.CLASS_NAME, self.DONE_BUTTON).click()
 
-# Verification/Validation part
+        # Verification/Validation part
         flights_list = self.driver.find_elements(By.XPATH, self.NONSTOP_FLIGHTS_LIST)  # List of Nonstop flights
         print("\nTotal available non-stop flights:", len(flights_list))
         # This part is moved to utilities package. Instead, call from Utils class.
@@ -38,5 +40,3 @@ class ResultPage(BaseDriver):
 
         utils = Utils()
         utils.assert_list_items_text(flights_list, "Nonstop")
-
-
