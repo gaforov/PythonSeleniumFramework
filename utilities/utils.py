@@ -20,3 +20,6 @@ class Utils:
         handler.setFormatter(formatter)
         logger.addHandler(handler)
         return logger
+
+    def read_data_from_excel_file(self, file_name):
+        wb = load_workbook(filename='demo_excel.xlsx')

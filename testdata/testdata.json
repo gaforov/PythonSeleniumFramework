@@ -1,0 +1,14 @@
+{
+  "test1": {
+    "depart_from": "LGB",
+    "destination": "JFK",
+    "departure_date": "09/10/2023",
+    "trip_type": "one_way"
+  },
+  "test2": {
+    "depart_from": "LAX",
+    "destination": "DEN",
+    "departure_date": "09/15/2023",
+    "trip_type": "one_way"
+  }
+}

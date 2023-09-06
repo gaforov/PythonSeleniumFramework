@@ -34,7 +34,7 @@ def setup(request, browser):
     request.cls.wait = wait
     yield
     time.sleep(2)
-    driver.close()
+    driver.quit()
 
 
 def pytest_addoption(parser):

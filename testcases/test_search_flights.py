@@ -1,25 +1,37 @@
+import unittest
+
 import pytest
+from ddt import ddt, file_data
+
 from pages.search_page import SearchPage
-import logging
-from ddt import ddt, data, unpack
 
-logging.basicConfig(level=logging.DEBUG, filename="test_logs.log")
 
+# logging.basicConfig(level=logging.DEBUG, filename="test_logs.log")
 
 # Add this argument in the logging: filemode="w" <--Override existing logs, filemode="a" <-- Append to an existing log
 
 
 @pytest.mark.usefixtures("setup")
 @ddt
-class TestSearchAndVerifyFilter:
+class TestSearchAndVerifyFilter(unittest.TestCase):
     @pytest.fixture(autouse=True)
     def objects_initializer(self):
         self.search_page = SearchPage(self.driver, self.wait)
 
-    @data(
-        ("LAX", "JFK", "09/05/2023", "one_way"),
-        ("LAX", "SFO", "09/15/2023", "one_way"),
-    )
+    # DDT Examples:
+    # Example 1: In-line data passed directly
+    # @data(("LAX", "JFK", "09/05/2023", "one_way"),
+    #       ("LAX", "SFO", "09/15/2023", "one_way")
+    #       )  # more than one data is failing, because after each test, the browser is not restarting.
+    # @unpack
+
+    # Example 2: Reading from json or yaml files.
+    # @file_data("../testdata/testdata.json")
+    # @file_data("../testdata/testdata.yaml")
+
+    # Example 3: Reading from an Excel/csv file.
+    @data(())
+    @unpack
     def test_search_flights(self, depart_from, destination, departure_date, trip_type):
         # search_page.trip_type("one_way")  # use only "one_way" or "round_trip" as arguments
         # search_page.search_flight("LAX", "JFK", "09/05/2023")
@@ -33,6 +45,6 @@ class TestSearchAndVerifyFilter:
         # result_page = ResultPage(self.driver, self.wait)
         # result_page.filter_nonstop_flights()
         search_result_page.get_nonstop_flights()
-        logging.debug("This is a sample log message")
-        logging.info("This is a sample log message")
-        logging.warning("This is a sample log message")
+        # logging.debug("This is a sample log message")
+        # logging.info("This is a sample log message")
+        # logging.warning("This is a sample log message")
