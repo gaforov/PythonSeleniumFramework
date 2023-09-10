@@ -1,9 +1,10 @@
 import unittest
 
 import pytest
-from ddt import ddt, file_data
+from ddt import ddt, file_data, data, unpack
 
 from pages.search_page import SearchPage
+from utilities.utils import Utils
 
 
 # logging.basicConfig(level=logging.DEBUG, filename="test_logs.log")
@@ -30,7 +31,7 @@ class TestSearchAndVerifyFilter(unittest.TestCase):
     # @file_data("../testdata/testdata.yaml")
 
     # Example 3: Reading from an Excel/csv file.
-    @data(())
+    @data(*Utils.read_data_from_excel_file("/Users/saidgaforov/PycharmProjects/PythonSeleniumFramework/testdata/excel_file.xlsx", "Sheet1"))
     @unpack
     def test_search_flights(self, depart_from, destination, departure_date, trip_type):
         # search_page.trip_type("one_way")  # use only "one_way" or "round_trip" as arguments
