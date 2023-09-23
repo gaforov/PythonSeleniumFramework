@@ -1,0 +1,4 @@
+depart_from,destination,departure_date,trip_type
+LGB,JFK,10/15/2023,one_way
+LAX,DEN,10/20/2023,one_way
+LAS,LAX,11/03/2023,one_way

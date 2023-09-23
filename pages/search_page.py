@@ -7,17 +7,17 @@ from pages.flights_result_page import ResultPage
 
 
 class SearchPage(BaseDriver):
-
     # Locators
     DEPART_FROM_FIELD = "reservationFlightSearchForm.originAirport"
     DESTINATION = "reservationFlightSearchForm.destinationAirport"
     DEPART_DATE = "aa-leavingOn"
     RETURN_DATE = "aa-returningOn"
     SEARCH_BUTTON = "flightSearchForm.button.reSubmit"
-    ONE_WAY_FLIGHT = "(//span[@class='control'])[3]"
+    # ONE_WAY_FLIGHT = "(//span[@class='control'])[3]"
+    ONE_WAY_FLIGHT = "//*[@id='bookingCheckboxContainer']/div[1]/div[2]/label/span[1]"
     ROUND_TRIP_FLIGHT = "(//span[@class='control'])[2]"
 
-    def trip_type(self, trip_type):
+    def get_trip_type(self, trip_type):
         match trip_type:
             case "one_way":
                 self.driver.find_element(By.XPATH, self.ONE_WAY_FLIGHT).click()
@@ -83,7 +83,7 @@ class SearchPage(BaseDriver):
         self.get_search_button().click()
 
     def search_flights(self, depart_airport, destination_airport, departure_date, trip_type):
-        self.trip_type(trip_type)
+        self.get_trip_type(trip_type)
         self.enter_depart_airport(depart_airport)
         self.enter_destination_airport(destination_airport)
         self.enter_departure_date(departure_date)

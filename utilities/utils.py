@@ -1,6 +1,8 @@
 import inspect
 import logging
+import csv
 from openpyxl import Workbook, load_workbook
+
 
 class Utils:
     def assert_list_items_text(self, list_name, value):
@@ -22,6 +24,7 @@ class Utils:
         return logger
 
     def read_data_from_excel_file(file_path, sheet_name):
+        """This function reads data from an Excel file"""
         datalist = []
         wb = load_workbook(filename=file_path)
         sheet = wb[sheet_name]
@@ -33,4 +36,14 @@ class Utils:
             for j in range(1, column_count + 1):
                 row.append(sheet.cell(row=i, column=j).value)
             datalist.append(row)
+        return datalist
+
+    def read_data_from_csv(filename):
+        """This function reads data from CSV file"""
+        datalist = []
+        csvdata = open(filename, 'r')     # Open CSV file
+        csv_reader = csv.reader(csvdata)  # create CSV reader (read from provided csv file)
+        next(csv_reader)                  # skip header
+        for rows in csv_reader:           # add CSV rows to the list
+            datalist.append(rows)
         return datalist

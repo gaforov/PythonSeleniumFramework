@@ -30,8 +30,11 @@ class TestSearchAndVerifyFilter(unittest.TestCase):
     # @file_data("../testdata/testdata.json")
     # @file_data("../testdata/testdata.yaml")
 
-    # Example 3: Reading from an Excel/csv file.
-    @data(*Utils.read_data_from_excel_file("/Users/saidgaforov/PycharmProjects/PythonSeleniumFramework/testdata/excel_file.xlsx", "Sheet1"))
+    # Example 3: Reading from an Excel file.
+    # @data(*Utils.read_data_from_excel_file("/Users/saidgaforov/PycharmProjects/PythonSeleniumFramework/testdata/excel_file.xlsx", "Sheet1"))
+
+    # Example 4: Reading from a CSV file
+    @data(*Utils.read_data_from_csv("/Users/saidgaforov/PycharmProjects/PythonSeleniumFramework/testdata/testdata.csv"))
     @unpack
     def test_search_flights(self, depart_from, destination, departure_date, trip_type):
         # search_page.trip_type("one_way")  # use only "one_way" or "round_trip" as arguments
